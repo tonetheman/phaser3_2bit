@@ -4,6 +4,22 @@ class MainScene extends Phaser.Scene {
     constructor() {
         super("main");
     }
+    runner_json_for_atlas() {
+        return {
+            frames : {
+                walk1 : {
+                    frame : {
+                        x : 0, y : 0, w : 16, h: 16
+                    }
+                },
+                walk2 : {
+                    frame : {
+                        x : 16*3, y : 0, w : 16, h: 16
+                    }
+                }
+            }
+        };
+    }
     preload() {
         // need to load a sprite sheet?
         // 96x16
@@ -17,40 +33,13 @@ class MainScene extends Phaser.Scene {
         // by hand as atlas
         // picked for front runner sprite
         // 0 and 3 are the images you want
-        this.load.atlas("aa", "0106210504_0012.png", {
-            frames : {
-                walk1 : {
-                    frame : {
-                        x : 0, y : 0, w : 16, h: 16
-                    }
-                },
-                walk2 : {
-                    frame : {
-                        x : 16*3, y : 0, w : 16, h: 16
-                    }
-                }
-            }
-        });
-
-        // one more aN0106020802_0012
-        this.load.atlas("bb", "aN0106020802_0012.png", {
-            frames : {
-                walk1 : {
-                    frame : {
-                        x : 0, y : 0, w : 16, h: 16
-                    }
-                },
-                walk2 : {
-                    frame : {
-                        x : 16*3, y : 0, w : 16, h: 16
-                    }
-                }
-            }
-        });
-
+        this.load.atlas("aa", "0106210504_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("bb", "aN0106020802_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("cc", "aN0304160504_0012.png", this.runner_json_for_atlas());
     }
     create() {
-
+        // this is a gross way to do this i think...
+        this.cameras.main.setBackgroundColor("rgb(255,0,0)");
         // shows all of the frames
         var config = {
             key: 'aAnimation',
@@ -73,6 +62,12 @@ class MainScene extends Phaser.Scene {
         frameRate : 3 });
         let tmp3 = this.add.sprite(100,200,"a").play("b2");
         tmp3.setScale(4);
+
+        this.anims.create({ key: 'c2', frames: this.anims.generateFrameNames('cc'), repeat: -1,
+        frameRate : 3 });
+        let tmp4 = this.add.sprite(200,200,"a").play("c2");
+        tmp4.setScale(4);
+
 
     }
 }
