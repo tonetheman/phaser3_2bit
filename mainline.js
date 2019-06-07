@@ -37,6 +37,14 @@ class MainScene extends Phaser.Scene {
         this.load.atlas("aa", "assets/0106210504_0012.png", this.runner_json_for_atlas());
         this.load.atlas("bb", "assets/aN0106020802_0012.png", this.runner_json_for_atlas());
         this.load.atlas("cc", "assets/aN0304160504_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("dd", "assets/aN0109110702_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("ee", "assets/aN0402040404_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("ff", "assets/aN0612120504_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("gg", "assets/aN0103080205_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("hh", "assets/aN0306030003_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("ii", "assets/aN0502090802_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("jj", "assets/aN0304200004_0012.png", this.runner_json_for_atlas());
+        this.load.atlas("kk", "assets/aN0501040304_0012.png", this.runner_json_for_atlas());
     }
     create() {
         // this is a gross way to do this i think...
@@ -54,22 +62,25 @@ class MainScene extends Phaser.Scene {
         tmp.setScale(SCALE);
 
         // shows just the atlas frames
-        this.anims.create({ key: 'a2', frames: this.anims.generateFrameNames('aa'), repeat: -1,
+        function bob(keyname, atlasname,x,y) {
+            this.anims.create({ key: keyname, frames: this.anims.generateFrameNames(atlasname), repeat: -1,
             frameRate : 3 });
-        let tmp2 = this.add.sprite(200,100,"a").play("a2");
-        tmp2.setScale(SCALE);
+            let tmp2 = this.add.sprite(x,y,"a").play(keyname);
+            tmp2.setScale(SCALE);
+        }
+        bob = bob.bind(this); // forcing it back into the right scope sigh
 
-        this.anims.create({ key: 'b2', frames: this.anims.generateFrameNames('bb'), repeat: -1,
-        frameRate : 3 });
-        let tmp3 = this.add.sprite(100,200,"a").play("b2");
-        tmp3.setScale(SCALE);
-
-        this.anims.create({ key: 'c2', frames: this.anims.generateFrameNames('cc'), repeat: -1,
-        frameRate : 3 });
-        let tmp4 = this.add.sprite(200,200,"a").play("c2");
-        tmp4.setScale(SCALE);
-
-
+        bob("a2","aa",200,100);
+        bob("b2","bb",100,200);
+        bob("c2","cc",200,200);
+        bob("d2","dd",150,150);
+        bob("e2","ee",50,50);
+        bob("f2","ff",150,50);
+        bob("g2","gg",50,150);
+        bob("h2","hh",25,100)
+        bob("i2","ii",100,25)
+        bob("j2","jj",125,200)
+        bob("k2","kk",100,225)
     }
 }
 
