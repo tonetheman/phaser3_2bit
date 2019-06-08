@@ -1,5 +1,14 @@
 let game = null;
 let SCALE = 2;
+let players = [];
+
+class Player {
+    constructor() {
+        this.id = ""; // keyname for image
+        this.atlasname = ""; // atlas keyname
+        this.sprite = ""; // phaser3 sprite
+    }
+}
 
 class MainScene extends Phaser.Scene {
     constructor() {
@@ -62,25 +71,30 @@ class MainScene extends Phaser.Scene {
         tmp.setScale(SCALE);
 
         // shows just the atlas frames
-        function bob(keyname, atlasname,x,y) {
+        function createPlayer(keyname, atlasname,x,y) {
             this.anims.create({ key: keyname, frames: this.anims.generateFrameNames(atlasname), repeat: -1,
             frameRate : 3 });
             let tmp2 = this.add.sprite(x,y,"a").play(keyname);
             tmp2.setScale(SCALE);
+            let p = new Player();
+            p.id  = keyname;
+            p.atlasname = atlasname;
+            p.sprite = tmp2;
+            return p;
         }
-        bob = bob.bind(this); // forcing it back into the right scope sigh
+        createPlayer = createPlayer.bind(this); // forcing it back into the right scope sigh
 
-        bob("a2","aa",200,100);
-        bob("b2","bb",100,200);
-        bob("c2","cc",200,200);
-        bob("d2","dd",150,150);
-        bob("e2","ee",50,50);
-        bob("f2","ff",150,50);
-        bob("g2","gg",50,150);
-        bob("h2","hh",25,100)
-        bob("i2","ii",100,25)
-        bob("j2","jj",125,200)
-        bob("k2","kk",100,225)
+        players.push(createPlayer("a2","aa",200,100));
+        players.push(createPlayer("b2","bb",100,200));
+        players.push(createPlayer("c2","cc",200,200));
+        players.push(createPlayer("d2","dd",150,150));
+        players.push(createPlayer("e2","ee",50,50));
+        players.push(createPlayer("f2","ff",150,50));
+        players.push(createPlayer("g2","gg",50,150));
+        players.push(createPlayer("h2","hh",25,100));
+        players.push(createPlayer("i2","ii",100,25));
+        players.push(createPlayer("j2","jj",125,200));
+        players.push(createPlayer("k2","kk",100,225));
     }
 }
 
